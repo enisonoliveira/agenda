@@ -1,0 +1,196 @@
+<main class="noMin ">
+    <div class="container">
+        <div class="titleSingle">
+            Lista de contatos
+        </div>
+        <div class="dataInfos">
+            <div class="row searchAdvance">
+                <ul class="dados">
+                    <div role="form">
+                        <div class="div_imput">
+                            <div class="label">
+                                <label style="font-family: Nunito,Arial,sans-serif;
+							font-size: .9rem;
+							font-weight: 400;
+							line-height: 1.5;">Buscar Contato </label>
+
+                            </div>
+                            <div class="label">
+                                <select style="width: 130px;" ng-model="form1.status" type="text" class="form-control">
+									<option 
+									ng-value="" ></option> 
+									<option 
+									 ng-value="1" >Com números<option> 
+										<option 
+										ng-value="0" >Sem número</option><option> 
+								</select>
+                            </div>
+                        </div>
+                        <button style="margin-top: 30px " ng-click='submitAnts($event)' class="btnSave">Buscar</button>
+                        <button style="margin-top: 30px;background:#1352a5;color: #fafafa;float: right; " ng-click='submitAnts($event)' class="btnSave">Novo Contato </button>
+                    </div>
+                </ul>
+            </div>
+            <br/>
+            <div class="form" id="grid" style="display: none;">
+                <div>
+                    <ul ng-repeat="data in contact" class="header_ul_table" ng-if="data.site!=''">
+                        <div class="header_table_contact" style="
+								box-shadow: 0 2px 3px rgba(0,0,0,.16);
+								word-wrap: break-word;
+								background-color: eeeee;
+								background-clip: border-box;
+								border: 0 solid rgba(0,0,0,.125);
+								border-radius: .35rem; ">
+                            <label> ID: {{data.id}} </label>
+
+                            <label style="float: right;"> 
+						 	 Silenciar contato? <input
+							 ng-click="updateStatus(data.id)"
+							 ng-model="data.status" value="1" 
+							 type="radio"> Sim <input ng-model="data.status" value="0"  type="radio"> Não</label>
+                        </div>
+                        <div style="
+							box-shadow: 0 2px 3px rgba(0,0,0,.16);
+							word-wrap: break-word;
+							background-color: #fafafa;
+							background-clip: border-box;
+							border: 0 solid rgba(0,0,0,.125);
+							border-radius: .35rem;
+							height: 200px;">
+                            <ul style="
+									float: left; 
+									width: 400px; 
+									padding: 10px;
+									background-color: #fafafa; ">
+                                <li>
+                                    <label style="width: 46px;">  Nome:
+								    </label> {{data.name}}
+                                </li>
+                                <li>
+                                    <label style="width: 46px;"> Email:</label>
+                                    <input style="width: 80%" id="input1_{{data.id}}" value=" {{data.email}}"></input>
+                                    <span ng-click="copy('input1_'+data.id)">
+	  
+									<i class="fa fa-clone"></i>
+									</span>
+                                </li>
+                                <li>
+                                    <label style="width: 46px;"> Endereço:</label>
+                                    <label style="width: 80%" id="input_{{data.id}}">Rua {{data.street}},{{data.neighborhood}},{{data.city}} - {{data.state}} - {{data.zip}}</label>
+                                </li>
+                                <li>
+                                    <label tyle="width: 46px;"> Telefones:</label>
+                                    <br/>
+                                    <label ng-repeat="phone in data.phone" style="width: 90%;" id="telefone_{{phone.number}}">Número-{{$index}}:{{phone.number}}
+											<br/>
+										</label>
+                                </li>
+                            </ul>
+                            <ul style="float: left;width: 450px; padding-top: 15px; ">
+                                <li>
+                                    <button type="button " class="btnSave " style="text-transform: capitalize; background-color: #ffc107; border-color: #ffc107; color: #ffffff; margin: 5px 0; padding: 5px 45px " ng-click="editardata(data,$event) ">
+										Editar   {{data.name}} </button>
+                                </li>
+                                <li>
+                                    <button type="button " class="btnSave " style="text-transform: capitalize; background-color: red; border-color: red; color: #ffffff; margin: 5px 0; padding: 5px 45px " ng-click="editardata(data,$event) ">
+										Excluir   {{data.name}} </button>
+                                </li>
+                                <li>
+                                    <a target="whatsapp " ng-click="updateStatus(data.id) " href="https://wa.me/55{{data.telefone}}?text='' '">
+
+                                        <button class="btnSave" style="
+												text-transform: capitalize;
+												margin: 5px 0;">
+												<i class="fa fa-whatsapp" aria-hidden="true"></i>
+												Chamar     {{data.name}}</button>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <br/>
+            <div class="form grid2 modalGeral" style="display: none; ">
+                <div>
+                    <ul class="header_ul_table" style="width: 60%;margin: 10%;">
+                        <div class="header_table_contact" style="
+							box-shadow: 0 2px 3px rgba(0,0,0,.16);
+							word-wrap: break-word;
+							background-color: eeeee;
+							background-clip: border-box;
+							border: 0 solid rgba(0,0,0,.125);
+							border-radius: .35rem; ">
+                            <label style="color: #fff"> ID: {{form.name}}</label>
+                        </div>
+                        <div style="
+							background-color:#fff;  
+							box-shadow: 0 2px 3px rgba(0,0,0,.16);
+							word-wrap: break-word;
+							background-color: #fafafa;
+							background-clip: border-box;
+							border: 0 solid rgba(0,0,0,.125);
+							border-radius: .35rem;
+							height: 200px;">
+                            <div style="float: left; width: 350px; padding: 10px;background:#fff;">
+                                <label>Informe o Plano*</label>
+                                <select id="planbol" ng-model="form.idplano">
+									<option ng-repeat="plans in planos"
+									ng-selected="form.idplano==plans.id" 
+									ng-value="plans.id" >{{plans.nomeplano}}
+									{{plans.valorinteiro}}{{plans.quebrado}}</option> 
+								</select>
+                                <button class="btnSave" style="width: 300px; font-size: 12px ;" ng-click="updateBillet($event)">
+								    Confirmar geração de novo boleto </button>
+                            </div>
+                            <div ng-if="form.codboleto!=' '" style="float: left;width: 350px;">
+                                <label> Boleto Gerado</label><br/>
+                                <input id="codboleto" value="{{form.codboleto}}"></input><span ng-click="copy('codboleto ')">Copiar</span><br/>
+                                <a target="_blank" class="codboleto" rel=”noopener name="{{form.email}}" oreferrer href="{{form.linkboleto}} ">Visualizar</a><br/>
+                            </div>
+                            <label style="background-color:rgba(16, 125, 226, 0.8); color: #fff; " ng-if="form.statusboleto==1"> Boleto vencendo</label>
+                            <label style="background-color: red; color: #fff; " ng-if="form.statusboleto==0"> Boleto vencido</label>
+                            <br/>
+                            <label class="whatsapp ">	
+								 <a  ng-click="updateStatus(form.id) " target="whatsapp"  href="https://wa.me/55{{form.telefone}}?text=' ' "> 
+								<button class="btnSave " 
+									style=" text-transform: capitalize; margin: 5px 0; " >
+									<i class="fa fa-whatsapp " aria-hidden="true "></i>
+									Chamar     {{data.name}}</button>  </a>
+							</label>
+                        </div>
+                </div>
+                </ul>
+            </div>
+            <br/>
+            <div class="form grid2 " style="display: none; ">
+            </div>
+            </a>
+            </ul>
+        </div>
+        <div id="sucessomodal " class="modalGeral ">
+            <div class="content small ">
+                <div class="head ">
+                    Excluido com sucesso!
+                </div>
+                <div class="box ">
+                    <p><strong>Dados excluido com sucesso</strong></p>
+                    <button ng-click="sair($event) " class="send ">OK!</button>
+                </div>
+            </div>
+        </div>
+        <div id="errormodal " class="modalGeral errormodal ">
+            <div class="content small ">
+                <div class="head ">
+                    Não pode ser alterado!
+                </div>
+                <div class="box ">
+                    <p><strong>Sem acesso a funcionalidade!</strong></p>
+                    <button ng-click="sair($event) " class="send ">Operação não permitida!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</main>

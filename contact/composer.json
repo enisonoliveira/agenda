@@ -1,0 +1,21 @@
+{
+    "name": "contact",
+    "description": "Teste Laravel",
+    "authors": [{
+        "name": "Enison Oliveira",
+        "email": "enisonoliveira@hotmail.com"
+    }],
+    "version": "1.0",
+    "type": "package",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "keywords": ["crossx", "teste", "avec", "Laravel", "Avec test", "Laravel Test"],
+    "require": {
+        "php": ">=7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ContactApp\\": "SDK/"
+        }
+    }
+}
