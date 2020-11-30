@@ -22,5 +22,10 @@ Route::get("/contact/report/withphone",[ContactController::class,'getReportConta
 Route::get("/contact/report/withoutphone",[ContactController::class,'getReportContactWitOuthPhone']);
 Route::get("/contact/report/all",[ContactController::class,'all']);
 Route::post("/contact/save",[ContactController::class,'save']);
+Route::post("/contact/delete",[ContactController::class,'delete']);
+Route::post("/contact/phone/delete",[ContactController::class,'deletePhone']);
+Route::post("/contact/phone/edit",[ContactController::class,'savePhoneList']);
+Route::post("/contact/edit",[ContactController::class,'savePersons']);
+Route::post("/contact/address/edit",[ContactController::class,'saveAddress']);
 Route::get("/contact/save",[ContactController::class,'save']);
 

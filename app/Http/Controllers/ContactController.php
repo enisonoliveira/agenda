@@ -152,6 +152,33 @@ class ContactController extends Controller
         }
     }
 
+    public function deletePhone()
+    {
+        try{
+            $phoneService=  new PhoneService();
+            $phone= $phoneService->find($this->request->input('idcontact'));
+            $phoneService->delete($phone->idphone);
+            return \Response::json( 'ok', 200);
+        }catch(Exception $e)
+        {
+            throw new Exception("error!");
+        }
+    }
+
+    public function deleteAdress()
+    {
+
+        try{       
+             $AddressService= new AddressService();
+            $address= $AddressService->find($person->address_id);
+            $AddressService->delete($this->request->input('idperson'));
+            return \Response::json( 'ok', 200);
+        }catch(Exception $e)
+        {
+            throw new Exception("error!");
+        }
+    }
+
     public function delete()
     {
         try
@@ -159,14 +186,14 @@ class ContactController extends Controller
             $contactService= new ContactService();
             $this->contact= $contactService->find($this->request->input('idcontact'));
             $personService= new PersonService();
-            $person= $personService->find($this->contact->persons_id);
-            $person->delete();
+            $personService->delete($this->contact->persons_id);
             $AddressService= new AddressService();
             $address= $AddressService->find($person->address_id);
-            $address->delete();
+            $AddressService->delete( $address->idadress);
             $phoneService=  new PhoneService();
-            $phoneService->delete($this->contact->idcontact);
-            $this->contact->delete();
+            $phone= $phoneService->find($this->contact->idcontact);
+            $phoneService->delete($phone->idphone);
+            $this->contact->delete($this->contact->idcontact);
             return \Response::json( 'ok', 200);
         }catch(Exception $e)
         {
@@ -176,22 +203,38 @@ class ContactController extends Controller
 
     public function getReportContactWithPhone()
     {
-        $contactService= new ContactService();
-        $result = $contactService->findWithPhone();
-        return \Response::json( $result , 200);
+        try
+        {
+            $contactService= new ContactService();
+            $result = $contactService->findWithPhone();
+            return \Response::json( $result , 200);
+        }catch(Exception $e)
+        {
+            throw new Exception("error!");
+        }
     }
 
     public function getReportContactWitOuthPhone()
-    {
-        $contactService= new ContactService();
-        $result = $contactService->findWitOuthPhone();
-        return \Response::json( $result , 200);
+    {   
+        try{
+            $contactService= new ContactService();
+            $result = $contactService->findWitOuthPhone();
+            return \Response::json( $result , 200);
+        }catch(Exception $e)
+        {
+            throw new Exception("error!");
+        }
     }
 
     public function all()
     {
-        $contactService= new ContactService();
-        $result = $contactService->all();
-        return \Response::json( $result , 200);
+        try{
+            $contactService= new ContactService();
+            $result = $contactService->all();
+            return \Response::json( $result , 200);
+        }catch(Exception $e)
+        {
+            throw new Exception("error!");
+        }
     }
 }

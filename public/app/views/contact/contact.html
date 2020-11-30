@@ -16,7 +16,7 @@
 
                             </div>
                             <div class="label">
-                                <select style="width: 130px;" ng-model="form1.status" type="text" class="form-control">
+                                <select ng-model="form1.status" class="form-control">
 									<option 
 									ng-value="" ></option> 
 									<option 
@@ -26,12 +26,13 @@
 								</select>
                             </div>
                         </div>
-                        <button style="margin-top: 30px " ng-click='submitAnts($event)' class="btnSave">Buscar</button>
-                        <button style="margin-top: 30px;background:#1352a5;color: #fafafa;float: right; " ng-click='submitAnts($event)' class="btnSave">Novo Contato </button>
+                        <div style="width: 100%; float: right;">
+                            <button style="margin-top: 30px " ng-click='submitAnts($event)' class="btnSave ">Buscar</button>
+                            <button style="margin-top: 30px;color:#1352a5;background:#fff;; text-transform: capitalize; " ng-click='submitAnts($event)' class="btnSave">Novo Contato </button>
+                        </div>
                     </div>
                 </ul>
             </div>
-            <br/>
             <div class="form" id="grid" style="display: none;">
                 <div>
                     <ul ng-repeat="data in contact" class="header_ul_table" ng-if="data.site!=''">
@@ -42,7 +43,7 @@
 								background-clip: border-box;
 								border: 0 solid rgba(0,0,0,.125);
 								border-radius: .35rem; ">
-                            <label> ID: {{data.id}} </label>
+                            <label> ID: {{data.idcontact}} </label>
 
                             <label style="float: right;"> 
 						 	 Silenciar contato? <input
@@ -53,47 +54,47 @@
                         <div style="
 							box-shadow: 0 2px 3px rgba(0,0,0,.16);
 							word-wrap: break-word;
-							background-color: #fafafa;
+							background-color: rgb(243, 243, 243);
 							background-clip: border-box;
 							border: 0 solid rgba(0,0,0,.125);
 							border-radius: .35rem;
 							height: 200px;">
                             <ul style="
 									float: left; 
-									width: 400px; 
+									width: 50%; 
 									padding: 10px;
-									background-color: #fafafa; ">
+									background-color: rgb(243, 243, 243); ">
                                 <li>
-                                    <label style="width: 46px;">  Nome:
-								    </label> {{data.name}}
+                                    <img style="width: 10%" id="input1_{{data.id}}" src="/app/img/user.png" ng-model='data.name' />
+                                </li>
+                                <li>
+                                    <label style="width: 46px;">  Nome: </label>
+                                    <label style="width: 80%" id="input1_{{data.id}}" type="text" value="" ng-model='data.name'> {{data.name}}</label>
                                 </li>
                                 <li>
                                     <label style="width: 46px;"> Email:</label>
-                                    <input style="width: 80%" id="input1_{{data.id}}" value=" {{data.email}}"></input>
-                                    <span ng-click="copy('input1_'+data.id)">
-	  
-									<i class="fa fa-clone"></i>
-									</span>
+                                    <label style="width: 80%" id="input1_{{data.id}}"> {{data.email}}</label>
                                 </li>
-                                <li>
-                                    <label style="width: 46px;"> Endereço:</label>
-                                    <label style="width: 80%" id="input_{{data.id}}">Rua {{data.street}},{{data.neighborhood}},{{data.city}} - {{data.state}} - {{data.zip}}</label>
-                                </li>
-                                <li>
-                                    <label tyle="width: 46px;"> Telefones:</label>
-                                    <br/>
-                                    <label ng-repeat="phone in data.phone" style="width: 90%;" id="telefone_{{phone.number}}">Número-{{$index}}:{{phone.number}}
-											<br/>
-										</label>
-                                </li>
+
+                                <li> <a>Editar</a></li>
                             </ul>
-                            <ul style="float: left;width: 450px; padding-top: 15px; ">
+                            <ul style=" float: left;width: 50%; padding-top: 15px; ">
                                 <li>
-                                    <button type="button " class="btnSave " style="text-transform: capitalize; background-color: #ffc107; border-color: #ffc107; color: #ffffff; margin: 5px 0; padding: 5px 45px " ng-click="editardata(data,$event) ">
-										Editar   {{data.name}} </button>
+                                    <label style="width: 46px; "> Endereço:</label>
+                                    <label style="width: 80% " id="input_{{data.id}} "> {{data.street}},{{data.neighborhood}},{{data.city}} - {{data.state}} - {{data.zip}}</label>
+                                    <a>Editar</a> <a>Excluir</a>
                                 </li>
                                 <li>
-                                    <button type="button " class="btnSave " style="text-transform: capitalize; background-color: red; border-color: red; color: #ffffff; margin: 5px 0; padding: 5px 45px " ng-click="editardata(data,$event) ">
+                                    <label tyle="width: 46px; "> Telefones</label> <a>Adicionar</a>
+                                </li>
+                                <li>
+                                    <label tyle="width: 46px; " ng-repeat="phone in data.phone ">
+                                  		 {{phone.number}} -
+										<a>Editar</a> <a>Excluir</a><br/>
+									</label>
+                                </li>
+                                <li>
+                                    <button type="button " class="btnSave " style="text-transform: capitalize; background-color: #fff; border-color: red; color: red; margin: 5px 0; padding: 5px 45px " ng-click="editardata(data,$event) ">
 										Excluir   {{data.name}} </button>
                                 </li>
                                 <li>

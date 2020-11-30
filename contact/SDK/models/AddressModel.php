@@ -11,6 +11,6 @@ class AddressModel  extends Model
     protected $table = 'address';
     protected $fillable = ['idaddress','street','street','neighborhood','city','state','zip','number','country'];
     protected $dates = ['deleted_at'];
-    public $primaryKey = 'idaddress';
+    public $primaryKey = 'idaddress';   
 
 }
