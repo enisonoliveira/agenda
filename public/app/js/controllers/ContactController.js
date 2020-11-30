@@ -3,12 +3,14 @@ app.controller('ContactController', function($scope, $http, $compile, $location,
     $scope.form1 = {}
     $scope.form = {}
 
-    $http.get(projectURL + '/report/all?token=' + token).success(function(data) {
-        $scope.contact = data;
-        $('#grid').show();
-    }).error(function(data) {
-        $(".errormodal").show();
-    });
+    $scope.changeDefaut = function() {
+        $http.get(projectURL + '/report/all?token=' + token).success(function(data) {
+            $scope.contact = data;
+            $('#grid').show();
+        }).error(function(data) {
+            $(".errormodal").show();
+        });
+    }
 
     $scope.buscar = function() {
         $(".grid2").hide();
@@ -39,32 +41,40 @@ app.controller('ContactController', function($scope, $http, $compile, $location,
     }
 
     $scope.deleteContact = function(id) {
-        $http.post(projectURL + '/contact/delete?' + id).success(function(data) {
+        $http.post(projectURL + '/delete?idcontact=' + $scope.idcontact).success(function(data) {
             $scope.contact = data;
+            $(".modalGeral").hide();
+            $scope.changeDefaut()
         }).error(function(data) {
-            $(".errormodal").show();
+            // $(".errormodal").show();
         });
     }
+
     $scope.deleteContactModal = function(e, id) {
         e.preventDefault()
-        $('.deleteModal').show();
+        console.log(id)
+        $('#deleteModal').show();
         $scope.idcontact = id;
     }
 
     $scope.deletePhone = function(id) {
-        $http.post(projectURL + '/contact/phone/delete?' + id).success(function(data) {
+        $http.post(projectURL + '/phone/delete?idcontact=' + id).success(function(data) {
             $scope.contact = data;
         }).error(function(data) {
             $(".errormodal").show();
         });
+        $scope.changeDefaut()
     }
-
-
 
     $scope.editardata = function(contact, e) {
         $("#grid").hide();
         $(".grid2").show();
         $scope.form = contact;
     }
+    $scope.sair = function() {
+        $(".modalGeral").hide();
+    }
+
+    $scope.changeDefaut();
 
 });

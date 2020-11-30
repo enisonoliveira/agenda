@@ -16,7 +16,9 @@ class AddressService
    public function find($id)
    {
        $model= AddressModel::find($id);
-       return $model->attributesToArray();
+       if($model)
+            return $model->attributesToArray();
+        return null;
 
    }
 

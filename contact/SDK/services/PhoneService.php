@@ -11,13 +11,17 @@ class PhoneService
     {
         $model= new PhoneModel($object);
         $model->save();
-        return $model->idpersons;
+        if($model)
+             return $model->idpersons;
+        return null;
     }
 
    public function find($idPerson)
    {
        $model= PhoneModel::find($idPerson);
-       return $model->attributesToArray();
+       if($model)
+            return $model->attributesToArray();
+        return null;
 
    }
 

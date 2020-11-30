@@ -186,14 +186,15 @@ class ContactController extends Controller
             $contactService= new ContactService();
             $this->contact= $contactService->find($this->request->input('idcontact'));
             $personService= new PersonService();
-            $personService->delete($this->contact->persons_id);
+            $person=$personService->find($this->contact['persons_id']);
             $AddressService= new AddressService();
-            $address= $AddressService->find($person->address_id);
-            $AddressService->delete( $address->idadress);
+            $address= $AddressService->find($person['address_id']);
             $phoneService=  new PhoneService();
-            $phone= $phoneService->find($this->contact->idcontact);
-            $phoneService->delete($phone->idphone);
-            $this->contact->delete($this->contact->idcontact);
+            $phoneService->delete($this->contact['idcontact']);
+            $contactService->delete($this->contact['idcontact']);
+            $personService->delete($this->contact['persons_id']);
+            if($address)
+                $AddressService->delete($address['idaddress']);
             return \Response::json( 'ok', 200);
         }catch(Exception $e)
         {

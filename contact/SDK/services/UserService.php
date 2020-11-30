@@ -17,7 +17,9 @@ class UserService
    public function find($idPerson)
    {
        $model= UserModel::find($idPerson);
-       return $model->attributesToArray();
+       if($model)
+            return $model->attributesToArray();
+        return null;
 
    }
 

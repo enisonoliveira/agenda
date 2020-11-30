@@ -16,8 +16,11 @@ class PersonService
 
    public function find($idPerson)
    {
+
        $model= PersonsModel::find($idPerson);
-       return $model->attributesToArray();
+       if($model)
+             return $model->attributesToArray();
+        return null;
 
    }
 

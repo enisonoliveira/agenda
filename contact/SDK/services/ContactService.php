@@ -18,7 +18,9 @@ class ContactService
    public function find($id)
    {
        $model= ContactModel::find($id);
-       return $model->attributesToArray();
+       if($model)
+            return $model->attributesToArray();
+        return null;
 
    }
 
@@ -32,6 +34,7 @@ class ContactService
    {
      return   DB::table('phone')
         ->where('contact_id',$idcontact)    
+        ->where(['deleted_at'=>null])    
         ->get();   
 
    }
@@ -42,6 +45,7 @@ class ContactService
         $model=DB::table('contact')
             ->join('persons','persons.idpersons','contact.persons_id')
             ->join('address','address.idaddress','persons.address_id')
+            ->where(['persons.deleted_at'=>null])       
             ->get();
         foreach($model as $array){
              $phone=self::phone($array->idcontact);
@@ -58,6 +62,7 @@ class ContactService
         $model=DB::table('contact')
             ->join('persons','persons.idpersons','contact.persons_id')
             ->join('address','address.idaddress','persons.address_id')
+            ->where(['persons.deleted_at'=>null])    
             ->get();
         foreach($model as $array){
             $phone=self::phone($array->idcontact);
@@ -77,6 +82,7 @@ class ContactService
         $model=DB::table('contact')
             ->join('persons','persons.idpersons','contact.persons_id')
             ->join('address','address.idaddress','persons.address_id')
+            ->where(['persons.deleted_at'=>null])    
             ->get();
         foreach($model as $array){
             $phone=self::phone($array->idcontact);
