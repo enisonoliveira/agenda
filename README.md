@@ -72,11 +72,11 @@ composer dump-autoload
 ## Instalar nova key app| va para a raiz do projeto e exeuta no terminal
 php artisan key:generate
  
-## iniciar app na porta 8000 linux,mac| va para a raiz do projeto e exeuta no terminal
-php -S localhost:8000 server.php
+## iniciar app na porta 8000 linux,mac| va para a raiz do projeto /public e exeuta no terminal
+php -S localhost:8000 
 
-## iniciar no windows | va para a raiz do projeto e exeuta no terminal
-php -S localhost:8000 server.php
+## iniciar no windows | va para a raiz do projeto /public e exeuta no terminal
+php -S localhost:8000
 
 ## Teste | va para a raiz do projeto e exeuta no terminal
 

@@ -38,13 +38,17 @@ app.controller('ContactController', function($scope, $http, $compile, $location,
         });
     }
 
-
     $scope.deleteContact = function(id) {
         $http.post(projectURL + '/contact/delete?' + id).success(function(data) {
             $scope.contact = data;
         }).error(function(data) {
             $(".errormodal").show();
         });
+    }
+    $scope.deleteContactModal = function(e, id) {
+        e.preventDefault()
+        $('.deleteModal').show();
+        $scope.idcontact = id;
     }
 
     $scope.deletePhone = function(id) {

@@ -90,11 +90,11 @@
                                 <li>
                                     <label tyle="width: 46px; " ng-repeat="phone in data.phone ">
                                   		 {{phone.number}} -
-										<a>Editar</a> <a>Excluir</a><br/>
+										<a>Editar</a> <a ng-click="deleteContactModal(data.idcontact)">Excluir</a><br/>
 									</label>
                                 </li>
                                 <li>
-                                    <button type="button " class="btnSave " style="text-transform: capitalize; background-color: #fff; border-color: red; color: red; margin: 5px 0; padding: 5px 45px " ng-click="editardata(data,$event) ">
+                                    <button type="button " class="btnSave " style="text-transform: capitalize; background-color: #fff; border-color: red; color: red; margin: 5px 0; padding: 5px 45px " ng-click="deleteContactModal($event,data.idcontact) ">
 										Excluir   {{data.name}} </button>
                                 </li>
                                 <li>
@@ -112,72 +112,15 @@
                     </ul>
                 </div>
             </div>
-            <br/>
-            <div class="form grid2 modalGeral" style="display: none; ">
-                <div>
-                    <ul class="header_ul_table" style="width: 60%;margin: 10%;">
-                        <div class="header_table_contact" style="
-							box-shadow: 0 2px 3px rgba(0,0,0,.16);
-							word-wrap: break-word;
-							background-color: eeeee;
-							background-clip: border-box;
-							border: 0 solid rgba(0,0,0,.125);
-							border-radius: .35rem; ">
-                            <label style="color: #fff"> ID: {{form.name}}</label>
-                        </div>
-                        <div style="
-							background-color:#fff;  
-							box-shadow: 0 2px 3px rgba(0,0,0,.16);
-							word-wrap: break-word;
-							background-color: #fafafa;
-							background-clip: border-box;
-							border: 0 solid rgba(0,0,0,.125);
-							border-radius: .35rem;
-							height: 200px;">
-                            <div style="float: left; width: 350px; padding: 10px;background:#fff;">
-                                <label>Informe o Plano*</label>
-                                <select id="planbol" ng-model="form.idplano">
-									<option ng-repeat="plans in planos"
-									ng-selected="form.idplano==plans.id" 
-									ng-value="plans.id" >{{plans.nomeplano}}
-									{{plans.valorinteiro}}{{plans.quebrado}}</option> 
-								</select>
-                                <button class="btnSave" style="width: 300px; font-size: 12px ;" ng-click="updateBillet($event)">
-								    Confirmar geração de novo boleto </button>
-                            </div>
-                            <div ng-if="form.codboleto!=' '" style="float: left;width: 350px;">
-                                <label> Boleto Gerado</label><br/>
-                                <input id="codboleto" value="{{form.codboleto}}"></input><span ng-click="copy('codboleto ')">Copiar</span><br/>
-                                <a target="_blank" class="codboleto" rel=”noopener name="{{form.email}}" oreferrer href="{{form.linkboleto}} ">Visualizar</a><br/>
-                            </div>
-                            <label style="background-color:rgba(16, 125, 226, 0.8); color: #fff; " ng-if="form.statusboleto==1"> Boleto vencendo</label>
-                            <label style="background-color: red; color: #fff; " ng-if="form.statusboleto==0"> Boleto vencido</label>
-                            <br/>
-                            <label class="whatsapp ">	
-								 <a  ng-click="updateStatus(form.id) " target="whatsapp"  href="https://wa.me/55{{form.telefone}}?text=' ' "> 
-								<button class="btnSave " 
-									style=" text-transform: capitalize; margin: 5px 0; " >
-									<i class="fa fa-whatsapp " aria-hidden="true "></i>
-									Chamar     {{data.name}}</button>  </a>
-							</label>
-                        </div>
-                </div>
-                </ul>
-            </div>
-            <br/>
-            <div class="form grid2 " style="display: none; ">
-            </div>
-            </a>
-            </ul>
         </div>
-        <div id="sucessomodal " class="modalGeral ">
+        <div id="deleteModal " class="modalGeral ">
             <div class="content small ">
                 <div class="head ">
-                    Excluido com sucesso!
+                    Excluir!
                 </div>
                 <div class="box ">
-                    <p><strong>Dados excluido com sucesso</strong></p>
-                    <button ng-click="sair($event) " class="send ">OK!</button>
+                    <p><strong>Deseja reamente Excluir</strong></p>
+                    <button ng-click="deleteContact($event) " class="send ">OK!</button>
                 </div>
             </div>
         </div>
