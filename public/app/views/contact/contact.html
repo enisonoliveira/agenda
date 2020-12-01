@@ -76,11 +76,11 @@
                                     <label style="width: 46px; "> Endereço:</label>
                                     <label style="width: 80% " id="input_{{data.id}} "> {{data.street}},{{data.neighborhood}},{{data.city}} - {{data.state}} - {{data.zip}}</label>
                                 </li>
+                                <label>Telefones</label>
+                                <li ng-repeat="phone in data.phone ">
 
-                                <li>
-                                    <label>Telefones</label>
-                                    <label tyle="width: 46px; " ng-repeat="phone in data.phone ">
-                                  		 {{phone.number}} -
+                                    <label tyle="width: 46px; ">
+                                  		 {{phone.number}} 
 									</label>
                                 </li>
                                 <li>
