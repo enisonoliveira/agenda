@@ -46,10 +46,7 @@ class Phone
 
     public function setPhoneNumber($number)
     {
-        if (!is_numeric($number)) {
-            throw new Exception('setPhone must be a numeric!');
-        }
-        if (strlen($number) <= 8) {
+        if (strlen($number) <= 7) {
             throw new Exception('setPhone must be less than 8 characters');
         }
         $this->number = $number;

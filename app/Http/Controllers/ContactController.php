@@ -16,6 +16,8 @@ use ContactApp\SDK\services\PersonService As PersonService;
 use ContactApp\SDK\services\PhoneService As PhoneService;
 use ContactApp\SDK\services\AddressService As AddressService;
 
+use Session;
+
 class ContactController extends Controller
 {
     private $contact;
@@ -58,7 +60,7 @@ class ContactController extends Controller
         try{
             if($this->request->has('phones'))
             {
-                $array = json_decode($this->requestArray['phones'], true);
+                $array = json_decode($this->requestArray['phones'],true);
                 if($this->request->has('idcontact')){
                     $this->idcontato=$this->request->input('idcontact');
                 }
@@ -114,7 +116,7 @@ class ContactController extends Controller
             $person->setName($this->requestArray['name'])
                 ->setEmail($this->requestArray['email'])
                 ->setAddressId(self:: saveAddress())
-                ->setAvatar(self::avatar());
+                ->setAvatar("/app/img/user.png");
             return  $personService->save($person->run());
         }catch(Exception $e)
         {
@@ -124,17 +126,21 @@ class ContactController extends Controller
 
     public function avatar()
     {
+        $personService= new PersonService();
         $destinationPath = public_path("image");
-        $idpersons = $this->request->input('idpersons');
+        $idpersons = Session::get('idpersons');
         if ($this->request->hasFile('photo')) 
         {
-            $request->file('photo')->move($destinationPath, $idpersons . ".png");
+            $this->request->file('photo')->move($destinationPath, $idpersons . ".png");
             $avatar_path = "image/" . $idpersons . ".png";
         } else 
         {
             $avatar_path = "image/avatar.png";
         }
-        return $avatar_path;
+        $person= new Persons( $personService->find($idpersons));
+        $person->setAvatar($avatar_path);
+        $personService->save($person->run());
+        return \Response::json( ['avatar'=>  $avatar_path], 200);
     }
 
     public function save()
@@ -143,9 +149,10 @@ class ContactController extends Controller
         {
             $id=self::savePersons();
             self::saveAddress($id);
+            Session::put('idpersons', $id);
             $this->idcontato=self::saveContact($id);
             self::savePhoneList();
-            return \Response::json( 'ok', 200);
+            return \Response::json( ['idcontact'=> $this->idcontato,"idpersons"=>$id], 200);
         }catch(Exception $e)
         {
             throw new Exception("error!");

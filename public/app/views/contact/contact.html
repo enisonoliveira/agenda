@@ -28,7 +28,7 @@
                         </div>
                         <div style="width: 100%; float: right;">
                             <button style="margin-top: 30px " ng-click='submitAnts($event)' class="btnSave ">Buscar</button>
-                            <button style="margin-top: 30px;color:#1352a5;background:#fff;; text-transform: capitalize; " ng-click='submitAnts($event)' class="btnSave">Novo Contato </button>
+                            <button style="margin-top: 30px;color:#1352a5;background:#fff;; text-transform: capitalize; " ng-click='newModal($event)' class="btnSave">Novo Contato </button>
                         </div>
                     </div>
                 </ul>
@@ -123,6 +123,59 @@
                     <button ng-click="deleteContact($event) " class="send ">Sim!</button>
                     <button ng-click="sair() " class="send ">Não!</button>
                 </div>
+            </div>
+        </div>
+        <div id="newModal" class="modalGeral">
+            <div class="content small ">
+                <div class="head ">
+                    Novo contato!
+                </div>
+                <div class="box ">
+                    <ul>
+                        <li>
+                            <label>Nome</label>
+                            <input ng-model="form2.name" type="text">
+                        </li>
+                        <li>
+                            <label>Telefone Fixo</label>
+                            <input ng-model="form2.phone.number1" type="phone">
+                        </li>
+                        <li>
+                            <label>Telefone Celular</label>
+                            <input ng-model="form2.phone.number2" type="phone">
+                        </li>
+                        <li>
+                            <label>E-mail</label>
+                            <input ng-model="form2.phon.email" type="email">
+                        </li>
+                        <li>
+                            <label>Rua</label>
+                            <input ng-model="form2.street" type="text">
+                        </li>
+                        <li>
+                            <label>numero</label>
+                            <input ng-model="form2.number" type="text">
+                        </li>
+                        <li>
+                            <label>Bairro</label>
+                            <input ng-model="form2.neighborhood" type="text">
+                        </li>
+                        <li>
+                            <label>Cidade</label>
+                            <input ng-model="form2.city" type="text">
+                        </li>
+                        <li>
+                            <label>Estado</label>
+                            <input ng-model="form2.state" type="text">
+                        </li>
+                    </ul>
+                    <button ng-click="saveContact($event)" class="send">Salvar!</button>
+                    <button ng-click="sair()" class="send ">Sair!</button>
+                </div>
+                <div style="display: none;" class="box1">
+                    <div class="dropzone" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods" ng-dropzone></div>
+                </div>
+
             </div>
         </div>
         <div id="errormodal " class="modalGeral errormodal ">

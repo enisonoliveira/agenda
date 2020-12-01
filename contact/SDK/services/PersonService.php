@@ -9,8 +9,16 @@ class PersonService
 
     public function save($object)
     {
-        $model= new PersonsModel($object);
-        $model->save();
+        $model=  new PersonsModel();
+        if($object['idpersons']!=null){
+            $model=  PersonsModel::find($object['idpersons']);
+        }
+        $model->idpersons=$object['idpersons'];
+        $model->name=$object['name'];
+        $model->email=$object['email'];
+        $model->address_id=$object['address_id'];
+        $model->avatar=$object['avatar'];
+        $model->update();
         return  $model->idpersons;
     }
 

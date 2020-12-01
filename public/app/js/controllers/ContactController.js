@@ -1,3 +1,6 @@
+$('[type=phone]').mask('(00) 0000-0000');
+$('[type=phone]').mask('(00) 0000-0000');
+
 app.controller('ContactController', function($scope, $http, $compile, $location, $routeParams) {
 
     $scope.form1 = {}
@@ -31,13 +34,8 @@ app.controller('ContactController', function($scope, $http, $compile, $location,
         }
     }
 
-    $scope.submitAnts = function(event) {
-        var url = $scope.buscar();
-        $http.get(projectURL + url).success(function(data) {
-            $scope.contact = data;
-        }).error(function(data) {
-            $(".errormodal").show();
-        });
+    $scope.newModal = function(event) {
+        $('#newModal').show();
     }
 
     $scope.deleteContact = function(id) {
@@ -74,6 +72,61 @@ app.controller('ContactController', function($scope, $http, $compile, $location,
     $scope.sair = function() {
         $(".modalGeral").hide();
     }
+
+    $scope.form2 = {
+        name: "",
+        phone: {
+            number1: "",
+            number2: ""
+        },
+        street: "",
+        neighborhood: "",
+        city: "",
+        state: ""
+
+    }
+    $scope.contactId = {
+        idpersons: ""
+    }
+    $scope.dzOptions = {
+        url: projectURL + '/save/image?idpersons',
+        paramName: 'photo',
+        maxFilesize: '10',
+        dictDefaultMessage: "Arraste sua foto para cá ou click aqui e selecione uma foto do seu computador",
+        addRemoveLinks: true,
+        dictResponseError: 'Não foi possivel carregar o arquivo.'
+    };
+
+    $scope.saveContact = function(e) {
+        e.preventDefault()
+        var obj = []
+        var json = {
+            'number': $scope.form2.phone.number1,
+        }
+        obj.push(json)
+        json = {
+            'number': $scope.form2.phone.number2,
+        }
+        obj.push(json)
+        var data = "name=" + $scope.form2.name +
+            "&number=" + $scope.form2.number +
+            "&email=" + $scope.form2.email +
+            "&address=" + $scope.form2.number +
+            "&address2=" + $scope.form2.neighborhood +
+            "&city=" + $scope.form2.city +
+            "&postalCode=" + 12312312321 +
+            "&state=" + $scope.form2.state +
+            "&phones=" + JSON.stringify(obj);
+        $http.get(projectURL + '/save?' + data + '&token = ' + token).success(function(data) {
+            $scope.contactId = data;
+
+            $('#newModal .box').hide();
+            $('#newModal .box1').show();
+        }).error(function(data) {
+            $(".errormodal").show();
+        });
+    }
+
 
     $scope.changeDefaut();
 
