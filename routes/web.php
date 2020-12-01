@@ -23,6 +23,7 @@ Route::get("/contact/report/withoutphone",[ContactController::class,'getReportCo
 Route::get("/contact/report/all",[ContactController::class,'all']);
 Route::post("/contact/save",[ContactController::class,'save']);
 Route::post("/contact/save/image",[ContactController::class,'avatar']);
+Route::post("/contact/idpersons",[ContactController::class,'setIdPersons']);
 Route::post("/contact/delete",[ContactController::class,'delete']);
 Route::post("/contact/phone/delete",[ContactController::class,'deletePhone']);
 Route::post("/contact/phone/edit",[ContactController::class,'savePhoneList']);

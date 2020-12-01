@@ -143,6 +143,12 @@ class ContactController extends Controller
         return \Response::json( ['avatar'=>  $avatar_path], 200);
     }
 
+    public function setIdPersons()
+    { 
+        $id= $this->requestArray['idpersons'];
+         Session::put('idpersons', $id);
+    }
+
     public function save()
     {
         try

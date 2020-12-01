@@ -15,6 +15,16 @@ app.controller('ContactController', function($scope, $http, $compile, $location,
         });
     }
 
+    $scope.search = function() {
+        var url = $scope.buscar();
+        $http.get(projectURL + url).success(function(data) {
+            $scope.contact = data;
+            $('#grid').show();
+        }).error(function(data) {
+            $(".errormodal").show();
+        });
+    }
+
     $scope.buscar = function() {
         $(".grid2").hide();
         $("#grid").show();
@@ -64,6 +74,15 @@ app.controller('ContactController', function($scope, $http, $compile, $location,
         $scope.changeDefaut()
     }
 
+    $scope.setIdpersons = function(id) {
+        $http.post(projectURL + '/idpersons?idpersons=' + id).success(function(data) {
+            $scope.contact = data;
+        }).error(function(data) {
+            $(".errormodal").show();
+        });
+        $scope.changeDefaut()
+    }
+
     $scope.editardata = function(contact, e) {
         $("#grid").hide();
         $(".grid2").show();
@@ -73,7 +92,20 @@ app.controller('ContactController', function($scope, $http, $compile, $location,
         $(".modalGeral").hide();
     }
 
+    $scope.editModel = function(e, data) {
+        $('#newModal').show();
+        if (typeof data.idpersons != null) {
+            $('#newModal .box1').show();
+        }
+        $scope.setIdpersons(data.idpersons);
+        $scope.form2 = data
+    }
+
+
     $scope.form2 = {
+        idcontact: "",
+        idpersons: "",
+        idaddress: "",
         name: "",
         phone: {
             number1: "",
@@ -110,6 +142,9 @@ app.controller('ContactController', function($scope, $http, $compile, $location,
         obj.push(json)
         var data = "name=" + $scope.form2.name +
             "&number=" + $scope.form2.number +
+            "&idcontact=" + $scope.form2.idcontact +
+            "&idpersons=" + $scope.form2.idpersons +
+            "&idaddress=" + $scope.form2.idaddress +
             "&email=" + $scope.form2.email +
             "&address=" + $scope.form2.number +
             "&address2=" + $scope.form2.neighborhood +

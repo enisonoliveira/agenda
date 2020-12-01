@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <div style="width: 100%; float: right;">
-                            <button style="margin-top: 30px " ng-click='submitAnts($event)' class="btnSave ">Buscar</button>
+                            <button style="margin-top: 30px " ng-click='search()' class="btnSave ">Buscar</button>
                             <button style="margin-top: 30px;color:#1352a5;background:#fff;; text-transform: capitalize; " ng-click='newModal($event)' class="btnSave">Novo Contato </button>
                         </div>
                     </div>
@@ -44,12 +44,6 @@
 								border: 0 solid rgba(0,0,0,.125);
 								border-radius: .35rem; ">
                             <label> ID: {{data.idcontact}} </label>
-
-                            <label style="float: right;"> 
-						 	 Silenciar contato? <input
-							 ng-click="updateStatus(data.id)"
-							 ng-model="data.status" value="1" 
-							 type="radio"> Sim <input ng-model="data.status" value="0"  type="radio"> Não</label>
                         </div>
                         <div style="
 							box-shadow: 0 2px 3px rgba(0,0,0,.16);
@@ -76,26 +70,25 @@
                                     <label style="width: 80%" id="input1_{{data.id}}"> {{data.email}}</label>
                                 </li>
 
-                                <li> <a>Editar</a></li>
                             </ul>
                             <ul style=" float: left;width: 50%; padding-top: 15px; ">
                                 <li>
                                     <label style="width: 46px; "> Endereço:</label>
                                     <label style="width: 80% " id="input_{{data.id}} "> {{data.street}},{{data.neighborhood}},{{data.city}} - {{data.state}} - {{data.zip}}</label>
-                                    <a>Editar</a> <a>Excluir</a>
                                 </li>
+
                                 <li>
-                                    <label tyle="width: 46px; "> Telefones</label> <a>Adicionar</a>
-                                </li>
-                                <li>
+                                    <label>Telefones</label>
                                     <label tyle="width: 46px; " ng-repeat="phone in data.phone ">
                                   		 {{phone.number}} -
-										<a>Editar</a> <a ng-click="deleteContactModal(data.idcontact)">Excluir</a><br/>
 									</label>
                                 </li>
                                 <li>
                                     <button type="button " class="btnSave " style="text-transform: capitalize; background-color: #fff; border-color: red; color: red; margin: 5px 0; padding: 5px 45px " ng-click="deleteContactModal($event,data.idcontact) ">
 										Excluir   {{data.name}} </button>
+                                </li>
+                                <li>
+                                    <a class="btnSave " style="text-transform: capitalize; background-color: #fff; border-color: yellow; color: yellow; margin: 5px 0; padding: 5px 45px " ng-click="editModel($evnt,data)">Editar  {{data.name}}</a>
                                 </li>
                                 <li>
                                     <a target="whatsapp " ng-click="updateStatus(data.id) " href="https://wa.me/55{{data.telefone}}?text='' '">
@@ -174,6 +167,7 @@
                 </div>
                 <div style="display: none;" class="box1">
                     <div class="dropzone" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods" ng-dropzone></div>
+                    <button ng-click="sair()" class="send ">Sair!</button>
                 </div>
 
             </div>
