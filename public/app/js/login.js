@@ -53,7 +53,7 @@
                  localStorage.setItem("emailcli", $scope.email);
                  localStorage.setItem("iduser", data.iduser);
                  localStorage.setItem("ip", ip);
-                 var url = "/appboleto/index.html";
+                 var url = "/app/!#";
                  location.replace(url);
              })
              .error(function(data) {

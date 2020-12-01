@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,4 +32,5 @@ Route::post("/contact/edit",[ContactController::class,'savePersons']);
 Route::post("/contact/address/edit",[ContactController::class,'ediAddress']);
 Route::post("/contact/address/delete",[ContactController::class,'delete']);
 Route::get("/contact/save",[ContactController::class,'save']);
+Route::get('/validarsenha',[UserController::class,'login']);
 

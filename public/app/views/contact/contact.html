@@ -52,7 +52,7 @@
 							background-clip: border-box;
 							border: 0 solid rgba(0,0,0,.125);
 							border-radius: .35rem;
-							height: 200px;">
+							height: 250px;">
                             <ul style="
 									float: left; 
 									width: 50%; 
@@ -77,10 +77,10 @@
                                     <label style="width: 80% " id="input_{{data.id}} "> {{data.street}},{{data.neighborhood}},{{data.city}} - {{data.state}} - {{data.zip}}</label>
                                 </li>
                                 <label>Telefones</label>
-                                <li ng-repeat="phone in data.phone ">
+                                <li ng-repeat="ph in data.phone ">
 
                                     <label tyle="width: 46px; ">
-                                  		 {{phone.number}} 
+                                  		 {{ph.number}} 
 									</label>
                                 </li>
                                 <li>

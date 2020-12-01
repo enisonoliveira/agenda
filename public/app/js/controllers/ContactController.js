@@ -99,14 +99,16 @@ app.controller('ContactController', function($scope, $http, $compile, $location,
             $('#newModal .box1').show();
         }
         $scope.setIdpersons(data.idpersons);
+        console.log(data.phone[0].number)
+        $scope.form2 = data
         if (data.phone.length > 0) {
-            $scope.form2.phone.number1 = data.phone[1].number
+
+            $scope.form2.phone.number1 = data.phone[0].number
         }
 
         if (data.phone.length > 1) {
             $scope.form2.phone.number2 = data.phone[1].number
         }
-        $scope.form2 = data
 
     }
     $scope.form2 = {
