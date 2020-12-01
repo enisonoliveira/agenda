@@ -94,14 +94,21 @@ app.controller('ContactController', function($scope, $http, $compile, $location,
 
     $scope.editModel = function(e, data) {
         $('#newModal').show();
+        console.log(data.phone)
         if (typeof data.idpersons != null) {
             $('#newModal .box1').show();
         }
         $scope.setIdpersons(data.idpersons);
+        if (data.phone.length > 0) {
+            $scope.form2.phone.number1 = data.phone[1].number
+        }
+
+        if (data.phone.length > 1) {
+            $scope.form2.phone.number2 = data.phone[1].number
+        }
         $scope.form2 = data
+
     }
-
-
     $scope.form2 = {
         idcontact: "",
         idpersons: "",
@@ -117,6 +124,7 @@ app.controller('ContactController', function($scope, $http, $compile, $location,
         state: ""
 
     }
+
     $scope.contactId = {
         idpersons: ""
     }

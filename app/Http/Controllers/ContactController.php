@@ -45,7 +45,7 @@ class ContactController extends Controller
             $contactService= new ContactService();
             if($this->request->has('idcontact'))
             {
-                $this->contact= new ContactService( $contactService->find($this->request->input('idcontact')));
+                $this->contact->setPersonsId($this->request->input('idcontact'));
             }
             $this->contact->setPersonsId($id);
             return $contactService->save($this->contact->run());
@@ -108,11 +108,11 @@ class ContactController extends Controller
         try
         {
             $person= new Persons(null);
+            $personService= new PersonService();
             if($this->request->has('idpersons'))
             {
                 $person= new Persons( $personService->find($this->request->input('idpersons')));
             }
-            $personService= new PersonService();
             $person->setName($this->requestArray['name'])
                 ->setEmail($this->requestArray['email'])
                 ->setAddressId(self:: saveAddress())
