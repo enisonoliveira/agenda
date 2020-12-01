@@ -41,9 +41,7 @@ class Contact
 
     public function setPersonsId($persons_id)
     {
-        if (!is_numeric($persons_id)) {
-            throw new Exception('setPersonsId must be a numeric!');
-        }
+       
         $this->persons_id = $persons_id;
         return $this;
     }
